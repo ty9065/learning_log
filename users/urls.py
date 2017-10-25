@@ -1,4 +1,4 @@
-"""learning_log URL Configuration
+"""users URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -13,11 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
-from django.contrib import admin
+from django.conf.urls import url
+from django.contrib.auth.views import login, logout
+
+from . import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'', include('learning_logs.urls', namespace='learning_logs')),
-    url(r'^users/', include('users.urls', namespace='users')),
+    url(r'^login/$', login, {'template_name': 'users/login.html'}, name='login'),
+    url(r'^logout/$', logout, {'template_name': 'learning_logs/index.html'}, name='logout'),
+    url(r'^register/$', views.register, name='register'),
 ]
