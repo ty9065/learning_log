@@ -62,7 +62,7 @@ ROOT_URLCONF = 'learning_log.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'learning_log/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,7 +135,7 @@ BOOTSTRAP3 = {
     'include_jquery': True,
 }
 
-# Hero设置
+# Heroku设置
 if os.getcwd() == '/app':
     import dj_database_url
     DATABASES = {
@@ -144,13 +144,13 @@ if os.getcwd() == '/app':
 
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['learning-log-ty9065.herokuapp.com']
+    DEBUG = False
 
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-    STATIC_URL = 'static'
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-    STATICFILES_DIRS = [
+    STATICFILES_DIRS = (
         os.path.join(PROJECT_ROOT, 'static'),
-    ]
+    )
