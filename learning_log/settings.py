@@ -136,7 +136,7 @@ BOOTSTRAP3 = {
 }
 
 # Heroku设置
-if os.getcwd() == '/app':
+if os.getcwd().split('/')[1] == 'app':
     import dj_database_url
     DATABASES = {
         'default': dj_database_url.config(default='postgres://localhost')
@@ -153,4 +153,4 @@ if os.getcwd() == '/app':
 
     STATICFILES_DIRS = (
         os.path.join(PROJECT_ROOT, 'static'),
-    )
+        )
