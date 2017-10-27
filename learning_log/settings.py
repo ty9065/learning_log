@@ -147,10 +147,10 @@ if os.getcwd() == '/app':
     ALLOWED_HOSTS = ['*']
 
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-    
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
     STATIC_URL = 'static'
 
-    STATICFILES_DIRS = (
+    STATICFILES_DIRS = [
         os.path.join(PROJECT_ROOT, 'static'),
-    )
+    ]
