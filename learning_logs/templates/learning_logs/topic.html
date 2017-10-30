@@ -6,7 +6,7 @@
 
 {% block content %}
   <p>
-      <a  href="{% url 'learning_logs:new_entry' topic.id %}">add new entry</a>
+      <a  href="{% url 'learning_logs:new_entry' topic.id %}">添加条目</a>
   </p>
 
   {% for entry in entries %}
@@ -15,7 +15,8 @@
              <h3>
     	  	  {{ entry.date_added|date:'M d, Y H:i' }}
                  <small>
-                     <a  href="{% url 'learning_logs:edit_entry' entry.id %}">edit entry</a>
+                     <a  href="{% url 'learning_logs:edit_entry' entry.id %}">编辑</a>
+                     <a  href="{% url 'learning_logs:delete_entry' entry.id %}" onclick="return confirm('删除文章将不可恢复，是否继续？')">删除</a>
                  </small>
              </h3>
          </div>
@@ -24,7 +25,7 @@
          </div>
      </div><!-- panel -->
   {% empty %}
-    There are no entries for this topic yet.
+    空空如也，去添加笔记吧！
   {% endfor %}
 
 {% endblock content %}

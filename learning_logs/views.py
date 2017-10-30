@@ -46,6 +46,30 @@ def new_topic(request):
 	return render(request, 'learning_logs/new_topic.html', context)
 
 @login_required
+def edit_topic(request, topic_id):
+	topic = get_object_or_404(Topic, id=topic_id)
+	check_topic_user(request,topic)
+
+	if request.method != 'POST':
+		form = TopicForm(instance=topic)
+	else:
+		form = TopicForm(instance=topic, data=request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('learning_logs:topics'))
+
+	context = {'topic':topic, 'form': form}
+	return render(request, 'learning_logs/edit_topic.html', context)
+
+@login_required
+def delete_topic(request, topic_id):
+	topic = get_object_or_404(Topic, id=topic_id)
+	check_topic_user(request, topic)
+
+	topic.delete()
+	return HttpResponseRedirect(reverse('learning_logs:topics'))
+
+@login_required
 def new_entry(request, topic_id):
 	topic = get_object_or_404(Topic, id=topic_id)
 	check_topic_user(request,topic)
@@ -79,3 +103,12 @@ def edit_entry(request, entry_id):
 
 	context = {'entry': entry, 'topic':topic, 'form': form}
 	return render(request, 'learning_logs/edit_entry.html', context)
+
+@login_required
+def delete_entry(request, entry_id):
+	entry = get_object_or_404(Entry, id=entry_id)
+	topic = entry.topic
+	check_topic_user(request, topic)
+
+	entry.delete()
+	return HttpResponseRedirect(reverse('learning_logs:topic',args=[topic.id]))
