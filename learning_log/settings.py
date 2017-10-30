@@ -136,7 +136,7 @@ BOOTSTRAP3 = {
 }
 
 # Heroku设置
-if os.getcwd()!= '/Users/tuyuan/myDjango/learning_log':
+if os.environ['HOME'] == '/app':
     import dj_database_url
     DATABASES = {
         'default': dj_database_url.config(default='postgres://localhost')
